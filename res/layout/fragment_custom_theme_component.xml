@@ -33,13 +33,13 @@
             android:layout_height="0dp"
             android:background="@color/color_primary"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="@dimen/preview_pager_max_height"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintHeight_percent="@dimen/preview_pager_maximum_height_ratio">
 
             <include
                 android:id="@+id/component_preview_content"
@@ -59,26 +59,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/component_preview_container"/>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".7"/>
-
-
         <TextView
             android:id="@+id/component_options_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="18dp"
+            android:layout_marginHorizontal="16dp"
             android:textAlignment="center"
             android:textAppearance="@style/HeaderTextAppearance"
             android:textSize="@dimen/component_options_title_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/component_preview_container"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias=".08"/>
+            app:layout_constraintBottom_toTopOf="@+id/options_container"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/options_container"
@@ -91,7 +84,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/component_options_title"
-            app:layout_constraintVertical_bias=".30"/>
+            app:layout_constraintVertical_bias="1"/>
 
         <TextView
             android:id="@+id/options_container_message"
