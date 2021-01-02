@@ -41,6 +41,11 @@
                 android:background="@color/color_primary_dark"
                 app:card_style="screen_aspect_ratio"/>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/divider_color"/>
+
             <LinearLayout
                 android:id="@+id/options_section"
                 android:layout_width="0dp"
