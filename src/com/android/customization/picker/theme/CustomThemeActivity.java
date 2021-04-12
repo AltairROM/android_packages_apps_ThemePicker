@@ -354,9 +354,13 @@ public class CustomThemeActivity extends FragmentActivity implements
             return CustomThemeComponentFragment.newInstance(
                     title,
                     position,
+<<<<<<< HEAD
                     titleResId,
                     true,
                     R.string.no_options_message_primary);
+=======
+                    titleResId);
+>>>>>>> upstream/lineage-17.1
         }
     }
 
