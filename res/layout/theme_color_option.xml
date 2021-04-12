@@ -27,7 +27,6 @@
         android:layout_height="@dimen/component_color_chip_container_size"
         android:layout_gravity="center"
         android:scaleType="center"
-<<<<<<< HEAD
         android:src="@drawable/color_chip_filled"/>
 
     <ImageView
@@ -36,7 +35,4 @@
         android:layout_gravity="center"
         android:src="@drawable/color_chip_selector"/>
 
-=======
-        android:src="@drawable/color_chip"/>
->>>>>>> upstream/lineage-17.1
 </FrameLayout>
