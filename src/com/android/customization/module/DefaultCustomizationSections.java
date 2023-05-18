@@ -7,18 +7,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.customization.model.color.ColorSectionController;
-import com.android.customization.model.font.FontManager;
-import com.android.customization.model.font.FontSectionController;
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.model.grid.GridSectionController;
-import com.android.customization.model.iconpack.IconPackManager;
-import com.android.customization.model.iconpack.IconPackSectionController;
-import com.android.customization.model.iconshape.IconShapeManager;
-import com.android.customization.model.iconshape.IconShapeSectionController;
 import com.android.customization.model.mode.DarkModeSectionController;
 import com.android.customization.model.mode.DarkModeSnapshotRestorer;
-import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.themedicon.ThemedIconSectionController;
 import com.android.customization.model.themedicon.ThemedIconSwitchProvider;
 import com.android.customization.model.themedicon.domain.interactor.ThemedIconInteractor;
@@ -133,24 +125,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 sectionNavigationController,
                                 wallpaperInteractor));
 
-        sectionControllers.add(
-                new ConnectedSectionController(
-                        // Theme color section.
-                        new ColorSectionController2(
-                                sectionNavigationController,
-                                new ViewModelProvider(
-                                        activity,
-                                        mColorPickerViewModelFactory)
-                                        .get(ColorPickerViewModel.class),
-                                lifecycleOwner),
-                        // Wallpaper quick switch section.
-                        new WallpaperQuickSwitchSectionController(
-                                screen,
-                                wallpaperQuickSwitchViewModel,
-                                lifecycleOwner,
-                                sectionNavigationController),
-                        /* reverseOrderWhenHorizontal= */ true));
-
         switch (screen) {
             case LOCK_SCREEN:
                 // Lock screen quick affordances section.
@@ -224,10 +198,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                 savedInstanceState,
                 displayUtils));
 
-        // Theme color section.
-        sectionControllers.add(new ColorSectionController(
-                activity, wallpaperColorsViewModel, lifecycleOwner, savedInstanceState));
-
         // Dark/Light theme section.
         sectionControllers.add(new DarkModeSectionController(
                 activity,
@@ -259,18 +229,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 mKeyguardQuickAffordancePickerViewModelFactory)
                                 .get(KeyguardQuickAffordancePickerViewModel.class),
                         lifecycleOwner));
-
-        // Icon pack selection section.
-        sectionControllers.add(new IconPackSectionController(
-                IconPackManager.getInstance(activity, new OverlayManagerCompat(activity)), sectionNavigationController));
-
-        // Font selection section.
-        sectionControllers.add(new FontSectionController(
-                FontManager.getInstance(activity, new OverlayManagerCompat(activity)), sectionNavigationController));
-
-        // Icon shape selection section.
-        sectionControllers.add(new IconShapeSectionController(
-                IconShapeManager.getInstance(activity, new OverlayManagerCompat(activity)), sectionNavigationController));
 
         return sectionControllers;
     }
