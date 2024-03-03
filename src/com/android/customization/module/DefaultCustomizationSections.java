@@ -8,14 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.customization.model.font.FontManager;
-import com.android.customization.model.font.FontSectionController;
 import com.android.customization.model.grid.GridOptionsManager;
-import com.android.customization.model.iconpack.IconPackManager;
-import com.android.customization.model.iconpack.IconPackSectionController;
-import com.android.customization.model.iconshape.IconShapeManager;
-import com.android.customization.model.iconshape.IconShapeSectionController;
-import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.themedicon.ThemedIconSectionController;
 import com.android.customization.model.themedicon.ThemedIconSwitchProvider;
 import com.android.customization.model.themedicon.domain.interactor.ThemedIconInteractor;
@@ -24,7 +17,6 @@ import com.android.customization.module.logging.ThemesUserEventLogger;
 import com.android.customization.picker.clock.ui.view.ClockViewFactory;
 import com.android.customization.picker.clock.ui.viewmodel.ClockCarouselViewModel;
 import com.android.customization.picker.color.domain.interactor.ColorPickerInteractor;
-import com.android.customization.picker.color.ui.section.ColorSectionController;
 import com.android.customization.picker.color.ui.viewmodel.ColorPickerViewModel;
 import com.android.customization.picker.grid.domain.interactor.GridInteractor;
 import com.android.customization.picker.grid.ui.section.GridSectionController;
@@ -157,24 +149,14 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 isTwoPaneAndSmallWidth,
                                 customizationPickerViewModel));
 
+        // Wallpaper quick switch section.
         sectionControllers.add(
-                new ConnectedSectionController(
-                        // Theme color section.
-                        new ColorSectionController(
-                                sectionNavigationController,
-                                new ViewModelProvider(
-                                        activity,
-                                        mColorPickerViewModelFactory)
-                                        .get(ColorPickerViewModel.class),
-                                lifecycleOwner),
-                        // Wallpaper quick switch section.
-                        new WallpaperQuickSwitchSectionController(
-                                customizationPickerViewModel.getWallpaperQuickSwitchViewModel(
-                                        screen),
-                                lifecycleOwner,
-                                sectionNavigationController,
-                                savedInstanceState == null),
-                        /* reverseOrderWhenHorizontal= */ true));
+                new WallpaperQuickSwitchSectionController(
+                        customizationPickerViewModel.getWallpaperQuickSwitchViewModel(
+                                screen),
+                        lifecycleOwner,
+                        sectionNavigationController,
+                        savedInstanceState == null));
 
         switch (screen) {
             case LOCK_SCREEN:
@@ -187,16 +169,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                         mKeyguardQuickAffordancePickerViewModelFactory)
                                         .get(KeyguardQuickAffordancePickerViewModel.class),
                                 lifecycleOwner));
-
-                // Icon pack selection section.
-                sectionControllers.add(new IconPackSectionController(
-                        IconPackManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
-
-                // Font selection section.
-                sectionControllers.add(new FontSectionController(
-                        FontManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
 
                 // Notifications section.
                 sectionControllers.add(
@@ -234,21 +206,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 GridOptionsManager.getInstance(activity),
                                 sectionNavigationController,
                                 lifecycleOwner));
-
-                // Icon pack selection section.
-                sectionControllers.add(new IconPackSectionController(
-                        IconPackManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
-
-                // Font selection section.
-                sectionControllers.add(new FontSectionController(
-                        FontManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
-
-                // Icon shape selection section.
-                sectionControllers.add(new IconShapeSectionController(
-                        IconShapeManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
                 break;
         }
 
