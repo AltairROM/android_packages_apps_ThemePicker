@@ -8,16 +8,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.customization.model.font.FontManager;
-import com.android.customization.model.font.FontSectionController;
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.model.grid.GridSectionController;
-import com.android.customization.model.iconpack.IconPackManager;
-import com.android.customization.model.iconpack.IconPackSectionController;
-import com.android.customization.model.iconshape.IconShapeManager;
-import com.android.customization.model.iconshape.IconShapeSectionController;
 import com.android.customization.model.mode.DarkModeSnapshotRestorer;
-import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.themedicon.ThemedIconSectionController;
 import com.android.customization.model.themedicon.ThemedIconSwitchProvider;
 import com.android.customization.model.themedicon.domain.interactor.ThemedIconInteractor;
@@ -25,7 +18,6 @@ import com.android.customization.model.themedicon.domain.interactor.ThemedIconSn
 import com.android.customization.picker.clock.ui.view.ClockViewFactory;
 import com.android.customization.picker.clock.ui.viewmodel.ClockCarouselViewModel;
 import com.android.customization.picker.color.domain.interactor.ColorPickerInteractor;
-import com.android.customization.picker.color.ui.section.ColorSectionController2;
 import com.android.customization.picker.color.ui.viewmodel.ColorPickerViewModel;
 import com.android.customization.picker.notifications.ui.section.NotificationSectionController;
 import com.android.customization.picker.notifications.ui.viewmodel.NotificationSectionViewModel;
@@ -148,25 +140,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 isTwoPaneAndSmallWidth,
                                 customizationPickerViewModel));
 
-        sectionControllers.add(
-                new ConnectedSectionController(
-                        // Theme color section.
-                        new ColorSectionController2(
-                                sectionNavigationController,
-                                new ViewModelProvider(
-                                        activity,
-                                        mColorPickerViewModelFactory)
-                                        .get(ColorPickerViewModel.class),
-                                lifecycleOwner),
-                        // Wallpaper quick switch section.
-                        new WallpaperQuickSwitchSectionController(
-                                customizationPickerViewModel.getWallpaperQuickSwitchViewModel(
-                                        screen),
-                                lifecycleOwner,
-                                sectionNavigationController,
-                                savedInstanceState == null),
-                        /* reverseOrderWhenHorizontal= */ true));
-
         switch (screen) {
             case LOCK_SCREEN:
                 // Lock screen quick affordances section.
@@ -209,22 +182,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 sectionNavigationController,
                                 lifecycleOwner,
                                 /* isRevampedUiEnabled= */ true));
-
-                // Icon pack selection section.
-                sectionControllers.add(new IconPackSectionController(
-                        IconPackManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
-
-                // Font selection section.
-                sectionControllers.add(new FontSectionController(
-                        FontManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
-
-                // Icon shape selection section.
-                sectionControllers.add(new IconShapeSectionController(
-                        IconShapeManager.getInstance(activity, new OverlayManagerCompat(activity)),
-                        sectionNavigationController));
-                break;
         }
 
         return sectionControllers;
