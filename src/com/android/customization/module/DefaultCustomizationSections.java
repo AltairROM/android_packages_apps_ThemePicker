@@ -140,6 +140,15 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 isTwoPaneAndSmallWidth,
                                 customizationPickerViewModel));
 
+        // Wallpaper quick switch section.
+        sectionControllers.add(
+                new WallpaperQuickSwitchSectionController(
+                        customizationPickerViewModel.getWallpaperQuickSwitchViewModel(
+                                screen),
+                        lifecycleOwner,
+                        sectionNavigationController,
+                        savedInstanceState == null));
+
         switch (screen) {
             case LOCK_SCREEN:
                 // Lock screen quick affordances section.
