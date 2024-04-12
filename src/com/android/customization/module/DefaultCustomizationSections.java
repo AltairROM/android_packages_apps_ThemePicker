@@ -24,7 +24,6 @@ import com.android.customization.picker.grid.domain.interactor.GridInteractor;
 import com.android.customization.picker.grid.ui.section.GridSectionController;
 import com.android.customization.picker.notifications.ui.section.NotificationSectionController;
 import com.android.customization.picker.notifications.ui.viewmodel.NotificationSectionViewModel;
-import com.android.customization.picker.preview.ui.section.PreviewWithClockCarouselSectionController;
 import com.android.customization.picker.preview.ui.section.PreviewWithThemeSectionController;
 import com.android.customization.picker.quickaffordance.ui.section.KeyguardQuickAffordanceSectionController;
 import com.android.customization.picker.quickaffordance.ui.viewmodel.KeyguardQuickAffordancePickerViewModel;
@@ -120,40 +119,21 @@ public final class DefaultCustomizationSections implements CustomizationSections
 
         // Wallpaper section.
         sectionControllers.add(
-                mFlags.isCustomClocksEnabled(activity)
-                        ? new PreviewWithClockCarouselSectionController(
+                new PreviewWithThemeSectionController(
                         activity,
                         lifecycleOwner,
                         screen,
                         wallpaperInfoFactory,
                         wallpaperColorsRepository,
                         displayUtils,
-                        mClockCarouselViewModelFactory,
-                        mClockViewFactory,
                         wallpaperPreviewNavigator,
-                        sectionNavigationController,
                         wallpaperInteractor,
                         mThemedIconInteractor,
                         mGridInteractor,
                         mColorPickerInteractor,
                         wallpaperManager,
                         isTwoPaneAndSmallWidth,
-                        customizationPickerViewModel)
-                        : new PreviewWithThemeSectionController(
-                                activity,
-                                lifecycleOwner,
-                                screen,
-                                wallpaperInfoFactory,
-                                wallpaperColorsRepository,
-                                displayUtils,
-                                wallpaperPreviewNavigator,
-                                wallpaperInteractor,
-                                mThemedIconInteractor,
-                                mGridInteractor,
-                                mColorPickerInteractor,
-                                wallpaperManager,
-                                isTwoPaneAndSmallWidth,
-                                customizationPickerViewModel));
+                        customizationPickerViewModel));
 
         sectionControllers.add(
                 new WallpaperQuickSwitchSectionController(
