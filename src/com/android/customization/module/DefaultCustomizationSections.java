@@ -9,7 +9,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
-import com.android.customization.model.font.FontSectionController;
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.model.themedicon.ThemedIconSectionController;
 import com.android.customization.model.themedicon.ThemedIconSwitchProvider;
@@ -19,7 +18,6 @@ import com.android.customization.module.logging.ThemesUserEventLogger;
 import com.android.customization.picker.clock.ui.view.ClockViewFactory;
 import com.android.customization.picker.clock.ui.viewmodel.ClockCarouselViewModel;
 import com.android.customization.picker.color.domain.interactor.ColorPickerInteractor;
-import com.android.customization.picker.color.ui.section.ColorSectionController;
 import com.android.customization.picker.color.ui.viewmodel.ColorPickerViewModel;
 import com.android.customization.picker.font.ui.viewmodel.FontPickerViewModel;
 import com.android.customization.picker.grid.domain.interactor.GridInteractor;
@@ -158,23 +156,12 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 customizationPickerViewModel));
 
         sectionControllers.add(
-                new ConnectedSectionController(
-                        // Theme color section.
-                        new ColorSectionController(
-                                sectionNavigationController,
-                                new ViewModelProvider(
-                                        activity,
-                                        mColorPickerViewModelFactory)
-                                        .get(ColorPickerViewModel.class),
-                                lifecycleOwner),
-                        // Wallpaper quick switch section.
-                        new WallpaperQuickSwitchSectionController(
-                                customizationPickerViewModel.getWallpaperQuickSwitchViewModel(
-                                        screen),
-                                lifecycleOwner,
-                                sectionNavigationController,
-                                savedInstanceState == null),
-                        /* reverseOrderWhenHorizontal= */ true));
+                new WallpaperQuickSwitchSectionController(
+                        customizationPickerViewModel.getWallpaperQuickSwitchViewModel(
+                                screen),
+                        lifecycleOwner,
+                        sectionNavigationController,
+                        savedInstanceState == null));
 
         switch (screen) {
             case LOCK_SCREEN:
@@ -199,11 +186,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
 
                 // More settings section.
                 sectionControllers.add(new MoreSettingsSectionController());
-
-                // Font selection section.
-                sectionControllers.add(new FontSectionController(
-                        mFontPickerViewModelFactory,
-                        (ViewModelStoreOwner) activity));
                 break;
 
             case HOME_SCREEN:
@@ -215,11 +197,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 savedInstanceState,
                                 mThemedIconSnapshotRestorer,
                                 mThemesUserEventLogger));
-
-                // Font selection section.
-                sectionControllers.add(new FontSectionController(
-                        mFontPickerViewModelFactory,
-                        (ViewModelStoreOwner) activity));
 
                 // Color contrast section
                     sectionControllers.add(
