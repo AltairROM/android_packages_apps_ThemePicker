@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.model.themedicon.ThemedIconSectionController;
@@ -19,7 +18,6 @@ import com.android.customization.picker.clock.ui.view.ClockViewFactory;
 import com.android.customization.picker.clock.ui.viewmodel.ClockCarouselViewModel;
 import com.android.customization.picker.color.domain.interactor.ColorPickerInteractor;
 import com.android.customization.picker.color.ui.viewmodel.ColorPickerViewModel;
-import com.android.customization.picker.font.ui.viewmodel.FontPickerViewModel;
 import com.android.customization.picker.grid.domain.interactor.GridInteractor;
 import com.android.customization.picker.grid.ui.section.GridSectionController;
 import com.android.customization.picker.notifications.ui.section.NotificationSectionController;
@@ -66,8 +64,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
     private final ColorPickerInteractor mColorPickerInteractor;
     private final ThemesUserEventLogger mThemesUserEventLogger;
 
-    private final FontPickerViewModel.Factory mFontPickerViewModelFactory;
-
     public DefaultCustomizationSections(
             ColorPickerViewModel.Factory colorPickerViewModelFactory,
             KeyguardQuickAffordancePickerViewModel.Factory
@@ -81,8 +77,7 @@ public final class DefaultCustomizationSections implements CustomizationSections
             ThemedIconInteractor themedIconInteractor,
             GridInteractor gridInteractor,
             ColorPickerInteractor colorPickerInteractor,
-            ThemesUserEventLogger themesUserEventLogger,
-            FontPickerViewModel.Factory fontPickerViewModelFactory) {
+            ThemesUserEventLogger themesUserEventLogger) {
         mColorPickerViewModelFactory = colorPickerViewModelFactory;
         mKeyguardQuickAffordancePickerViewModelFactory =
                 keyguardQuickAffordancePickerViewModelFactory;
@@ -96,7 +91,6 @@ public final class DefaultCustomizationSections implements CustomizationSections
         mColorPickerInteractor = colorPickerInteractor;
         mThemesUserEventLogger = themesUserEventLogger;
         mColorContrastSectionViewModelFactory = colorContrastSectionViewModelFactory;
-        mFontPickerViewModelFactory = fontPickerViewModelFactory;
     }
 
     @Override
